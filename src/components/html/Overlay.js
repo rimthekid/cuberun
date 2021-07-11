@@ -69,7 +69,7 @@ const Overlay = () => {
                   <p>Controls</p>
                   ← a / d →
                 </span>
-                <span className="game__menu-warning">Photosensitivity warning - Game contains flashing lights</span>
+                <span className="game__menu-warning">Created by <a href="https://t.me/hamidwebd">@HamidWEBD</a> - Donate: <a href="https://webdollar.io/payment/WEBD$gDMvs8PtNgoEurn#d11+IZa$4RWf4fZ58L$/1000">WEBD$gDMvs8PtNgoEurn#d11+IZa$4RWf4fZ58L$</a></span>
                 <Author />
               </div>
             </>

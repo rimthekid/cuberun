@@ -30,7 +30,7 @@ export default function Hud() {
 
   const speedRef = useRef()
   const scoreRef = useRef()
-
+  const webdref = useRef()
   let currentSpeed = getSpeed()
   let currentScore = getScore()
 
@@ -45,7 +45,9 @@ export default function Hud() {
       if (scoreRef.current) {
         scoreRef.current.innerText = getScore()
       }
-
+      if (webdref.current){
+        webdref.current.innerText = Math.round(getScore()/1000)
+      }
       // eslint-disable-next-line
       then = now
     }
@@ -106,6 +108,8 @@ export default function Hud() {
           <h1 ref={speedRef} className="score__number">{currentSpeed}</h1>
           <h3 className="score__title">SCORE</h3>
           <h1 ref={scoreRef} className="score__number">{currentScore}</h1>
+          <h3 className="score__title">WEB$</h3>
+          <h1 ref={webdref} className="score__number">{Math.round(currentScore/1000)}</h1>
         </div>
       </div>
     </div>

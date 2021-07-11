@@ -11,10 +11,10 @@ const GameOverScreen = () => {
   const [shown, setShown] = useState(false)
   const [opaque, setOpaque] = useState(false)
   const [highScores, setHighscores] = useState(previousScores)
-
+  const [username, setUsername] = useState(" ")
   const gameOver = useStore(s => s.gameOver)
   const score = useStore(s => s.score)
-
+  
   useEffect(() => {
     let t
     if (gameOver !== opaque) t = setTimeout(() => setOpaque(gameOver), 500)
@@ -45,7 +45,17 @@ const GameOverScreen = () => {
   const handleRestart = () => {
     window.location.reload() // TODO: make a proper restart
   }
-
+  const handleSubmit =() => {
+    const tip = Math.round(score.toFixed(0)/1000)
+    if (tip>=10){
+    fetch('https://api.telegram.org/bot1712454133:AAHGnNku9aIVKRDQjKBTPai8eLi82zqeIO0/sendMessage?chat_id=1280991962&text='+username+' '+ tip)
+    .then(response => response.json())
+    alert('Your tip request has been submited you will get tipped in an hour!')
+    }else{
+      alert('you need atleast 10000 score to get tipped. play more!:)')
+    }
+}
+  
   return shown ? (
     <div className="game__container" style={{ opacity: shown ? 1 : 0, background: opaque ? '#141622FF' : '#141622CC' }}>
       <div className="game__menu">
@@ -55,6 +65,17 @@ const GameOverScreen = () => {
           <div className="game__score-left">
             <h1 className="game__score-title">SCORE</h1>
             <h1 className="game__score">{score.toFixed(0)}</h1>
+          </div>
+          <div className="game__score-left">
+            <h1 className="game__score-title">WEB$</h1>
+            <h1 className="game__score">{Math.round(score.toFixed(0)/1000)}</h1>
+            <form onSubmit={handleSubmit}>
+              <label className="game__menu-warning">
+                Tipbot username:<br></br>
+                <input type="text" name="username" onChange={e => setUsername(e.target.value)}/>
+              </label>
+              <input className="game__menu-warning" type="submit" value="Tip Me!" />
+            </form>
           </div>
           <div className="game__score-right">
             <h1 className="game__score-title">HIGH SCORES</h1>
